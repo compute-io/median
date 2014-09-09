@@ -25,7 +25,10 @@
   "keywords": [
     "compute.io",
     "compute",
-    "computation"
+    "computation",
+    "statistics",
+    "stats",
+    "median"
   ],
   "bugs": {
     "url": "https://github.com/compute-io/median/issues"

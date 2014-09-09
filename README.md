@@ -1,4 +1,4 @@
-median
+Median
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
@@ -19,14 +19,20 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 To use the module,
 
 ``` javascript
-var lib = require( 'compute-median' );
+var median = require( 'compute-median' );
 ```
 
 
 ## Examples
 
 ``` javascript
-var lib = require( 'compute-median' );
+var data = new Array( 1001 );
+
+for ( var i = 0; i < data.length; i++ ) {
+	data[ i ] = Math.round( Math.random() * 100 );
+}
+
+console.log( median( data ) );
 ```
 
 To run the example code from the top-level application directory,
