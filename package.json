@@ -1,7 +1,7 @@
 {
   "name": "compute-median",
   "version": "1.0.0",
-  "description": "Computes the median of an array of values.",
+  "description": "Computes the median of a numeric array.",
   "author": {
     "name": "Athan Reines",
     "email": "kgryte@gmail.com"
@@ -28,6 +28,9 @@
     "computation",
     "statistics",
     "stats",
+    "mathematics",
+    "math",
+    "central tendency",
     "median"
   ],
   "bugs": {

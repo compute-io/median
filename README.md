@@ -2,7 +2,7 @@ Median
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> Computes the median of an array of values.
+> Computes the [median](http://en.wikipedia.org/wiki/Median) of a numeric array.
 
 
 ## Installation
@@ -20,6 +20,21 @@ To use the module,
 
 ``` javascript
 var median = require( 'compute-median' );
+```
+
+#### median( arr[, sorted] )
+
+Computes the median of a numeric `array`. If the input `array` is already sorted in __ascending__ order, set the `sorted` flag to `true`.
+
+``` javascript
+var unsorted = [ 5, 3, 2, 4 ],
+	sorted = [ 2, 3, 4, 5 ];
+
+var m1 = median( unsorted );
+// returns 3.5
+
+var m2 = median( sorted, true );
+// returns 3.5
 ```
 
 
@@ -40,6 +55,11 @@ To run the example code from the top-level application directory,
 ``` bash
 $ node ./examples/index.js
 ```
+
+
+## Notes
+
+If provided an unsorted input `array`, the function is `O( N log(N) )`, where `N` is the `array` length. If the `array` is already sorted in __ascending__ order, the function is `O(1)`.
 
 
 ## Tests
@@ -66,7 +86,7 @@ $ make test-cov
 Istanbul creates a `./reports/coverage` directory. To access an HTML version of the report,
 
 ``` bash
-$ open reports/coverage/lcov-report/index.html
+$ make view-cov
 ```
 
 

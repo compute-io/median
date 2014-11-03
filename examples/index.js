@@ -1,3 +1,5 @@
+'use strict';
+
 var median = require( './../lib' );
 
 var data = new Array( 1001 );

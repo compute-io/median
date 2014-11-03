@@ -1,3 +1,4 @@
+'use strict';
 
 // MODULES //
 
@@ -17,7 +18,6 @@ var expect = chai.expect,
 // TESTS //
 
 describe( 'compute-median', function tests() {
-	'use strict';
 
 	it( 'should export a function', function test() {
 		expect( median ).to.be.a( 'function' );
@@ -45,6 +45,29 @@ describe( 'compute-median', function tests() {
 		}
 	});
 
+	it( 'should throw an error if provided a non-boolean sorted flag', function test() {
+		var values = [
+			'5',
+			5,
+			[],
+			undefined,
+			null,
+			NaN,
+			function(){},
+			{}
+		];
+
+		for ( var i = 0; i < values.length; i++ ) {
+			expect( badValue( values[i] ) ).to.throw( TypeError );
+		}
+
+		function badValue( value ) {
+			return function() {
+				median( [], value );
+			};
+		}
+	});
+
 	it( 'should compute the median', function test() {
 		var data, expected;
 
@@ -57,6 +80,12 @@ describe( 'compute-median', function tests() {
 		expected = 4;
 
 		assert.strictEqual( median( data ), expected );
+
+		// Sorted:
+		data = [ 2, 2, 3, 4, 5, 8, 9 ];
+		expected = 4;
+
+		assert.strictEqual( median( data, true ), expected );
 	});
 
 });
