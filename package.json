@@ -14,7 +14,7 @@
     {
       "name": "Philipp Burckhardt",
       "email": "pburckhardt@outlook.com"
-    },
+    }
   ],
   "scripts": {
     "test": "./node_modules/.bin/mocha",
