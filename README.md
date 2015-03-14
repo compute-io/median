@@ -22,9 +22,9 @@ To use the module,
 var median = require( 'compute-median' );
 ```
 
-#### median( arr[, sorted] )
+#### median( arr[, options] )
 
-Computes the median of a numeric `array`. If the input `array` is already sorted in __ascending__ order, set the `sorted` flag to `true`.
+Computes the median of a numeric `array`. For unsorted primitive `arrays`,
 
 ``` javascript
 var unsorted = [ 5, 3, 2, 4 ],
@@ -32,11 +32,46 @@ var unsorted = [ 5, 3, 2, 4 ],
 
 var m1 = median( unsorted );
 // returns 3.5
+```
 
-var m2 = median( sorted, true );
+The function accepts two `options`:
+
+*	`sorted`: `boolean` flag indicating if the input `array` is sorted in __ascending__ order. Default: `false`.
+*	`accessor`: accessor `function` for accessing values in object `arrays`.
+
+If the input `array` is already sorted in __ascending__ order, set the `sorted` option to `true`.
+
+``` javascript
+var sorted = [ 2, 3, 4, 5 ];
+
+var m2 = median( sorted, {
+	'sorted': true,
+} );
 // returns 3.5
 ```
 
+For object `arrays`, provide an accessor `function` for accessing `array` values
+
+``` javascript
+var data = [
+	[1,5],
+	[3,3],
+	[4,2],
+	[5,4],
+];
+
+function getValue( d ) {
+	return d[ 1 ];
+}
+
+var m3 = nanmedian( data, {
+	'sorted': false,
+	'accessor': getValue
+});
+// returns 3.5
+```
+
+__Note__: if provided an `array` which does not contain any numeric values, the function returns `null`.
 
 ## Examples
 
@@ -92,7 +127,7 @@ $ make view-cov
 
 ## License
 
-[MIT license](http://opensource.org/licenses/MIT). 
+[MIT license](http://opensource.org/licenses/MIT).
 
 
 ---
