@@ -10,7 +10,11 @@
     {
       "name": "Athan Reines",
       "email": "kgryte@gmail.com"
-    }
+    },
+    {
+      "name": "Philipp Burckhardt",
+      "email": "pburckhardt@outlook.com"
+    },
   ],
   "scripts": {
     "test": "./node_modules/.bin/mocha",
@@ -36,7 +40,12 @@
   "bugs": {
     "url": "https://github.com/compute-io/median/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "validate.io-array": "^1.0.3",
+    "validate.io-boolean": "^1.0.4",
+    "validate.io-function": "^1.0.2",
+    "validate.io-object": "^1.0.3"
+  },
   "devDependencies": {
     "chai": "1.x.x",
     "mocha": "1.x.x",
