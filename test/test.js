@@ -1,3 +1,4 @@
+/* global require, describe, it */
 'use strict';
 
 // MODULES //
@@ -25,15 +26,15 @@ describe( 'compute-median', function tests() {
 
 	it( 'should throw an error if provided a non-array', function test() {
 		var values = [
-				'5',
-				5,
-				true,
-				undefined,
-				null,
-				NaN,
-				function(){},
-				{}
-			];
+			'5',
+			5,
+			true,
+			undefined,
+			null,
+			NaN,
+			function(){},
+			{}
+		];
 
 		for ( var i = 0; i < values.length; i++ ) {
 			expect( badValue( values[i] ) ).to.throw( TypeError );
@@ -41,6 +42,28 @@ describe( 'compute-median', function tests() {
 		function badValue( value ) {
 			return function() {
 				median( value );
+			};
+		}
+	});
+
+	it( 'should throw an error if options is not an object', function test() {
+		var values = [
+			'5',
+			5,
+			true,
+			undefined,
+			null,
+			NaN,
+			function(){},
+			[]
+		];
+
+		for ( var i = 0; i < values.length; i++ ) {
+			expect( badValue( values[i] ) ).to.throw( TypeError );
+		}
+		function badValue( value ) {
+			return function() {
+				median( [ 2, 3 ], value );
 			};
 		}
 	});
@@ -63,7 +86,30 @@ describe( 'compute-median', function tests() {
 
 		function badValue( value ) {
 			return function() {
-				median( [], value );
+				median( [ 2, 3 ], {'sorted': value } );
+			};
+		}
+	});
+
+	it( 'should throw an error if provided an accessor option which is not a function', function test() {
+		var values = [
+			'5',
+			5,
+			[],
+			undefined,
+			null,
+			NaN,
+			true,
+			{}
+		];
+
+		for ( var i = 0; i < values.length; i++ ) {
+			expect( badValue( values[i] ) ).to.throw( TypeError );
+		}
+
+		function badValue( value ) {
+			return function() {
+				median( [ 2, 3 ], {'accessor': value });
 			};
 		}
 	});
@@ -85,7 +131,53 @@ describe( 'compute-median', function tests() {
 		data = [ 2, 2, 3, 4, 5, 8, 9 ];
 		expected = 4;
 
-		assert.strictEqual( median( data, true ), expected );
+		assert.strictEqual( median( data, {'sorted': true} ), expected );
+	});
+
+	it( 'should compute the median using an accessor function', function test() {
+		var data, expected, actual;
+
+		data = [
+			[1,2],
+			[2,4],
+			[4,5],
+			[5,3],
+			[6,8],
+			[8,2]
+		];
+		expected = 3.5;
+
+		actual = median( data, {
+			'accessor': getValue
+		});
+		assert.strictEqual( actual, expected );
+
+		// Sorted:
+		data = [
+			[1,2],
+			[3,2],
+			[4,3],
+			[6,5],
+			[7,8],
+			[8,9]
+		];
+		expected = 4;
+
+		actual = median( data, {
+			'sorted': true,
+			'accessor': getValue
+		});
+		assert.strictEqual( actual, expected );
+
+		function getValue( d ) {
+			return d[ 1 ];
+		}
+	});
+
+	it( 'should return null if provided an empty array', function test() {
+		var expected = null;
+
+		assert.strictEqual( median( [] ), expected );
 	});
 
 });
