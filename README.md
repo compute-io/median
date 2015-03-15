@@ -22,7 +22,7 @@ var median = require( 'compute-median' );
 
 #### median( arr[, options] )
 
-Computes the median of an `array`. For unsorted primitive `arrays`,
+Computes the median of an `array`. For unsorted primitive number `arrays`,
 
 ``` javascript
 var unsorted = [ 5, 3, 2, 4 ];
@@ -92,10 +92,12 @@ $ node ./examples/index.js
 
 ## Notes
 
-*	If provided a sorted (in __ascending__ order) numeric `array`, the function is `O(1)`.
-*	If provided a sorted object `array`, the function is `O(N)`.
-*	If provided an unsorted numeric `array`, the function is `O( N log(N) )`.
-* 	If provided an unsorted object `array`, the function is `O( N + N log(N) )`, where `N` is the `array` length.
+For an input `array` of length `N`,
+
+*	if provided a sorted (in __ascending__ order) numeric `array`, the function is `O(1)`.
+*	if provided a sorted object `array`, the function is `O(N)`.
+*	if provided an unsorted numeric `array`, the function is `O( N log(N) )`.
+* 	if provided an unsorted object `array`, the function is `O( N + N log(N) )`.
 
 
 ## Tests
