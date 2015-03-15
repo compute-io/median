@@ -2,7 +2,7 @@ Median
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> Computes the [median](http://en.wikipedia.org/wiki/Median) of a numeric array.
+> Computes the [median](http://en.wikipedia.org/wiki/Median) of an array.
 
 
 ## Installation
@@ -16,19 +16,16 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 
 ## Usage
 
-To use the module,
-
 ``` javascript
 var median = require( 'compute-median' );
 ```
 
 #### median( arr[, options] )
 
-Computes the median of a numeric `array`. For unsorted primitive `arrays`,
+Computes the median of an `array`. For unsorted primitive `arrays`,
 
 ``` javascript
-var unsorted = [ 5, 3, 2, 4 ],
-	sorted = [ 2, 3, 4, 5 ];
+var unsorted = [ 5, 3, 2, 4 ];
 
 var m1 = median( unsorted );
 // returns 3.5
@@ -46,11 +43,11 @@ var sorted = [ 2, 3, 4, 5 ];
 
 var m2 = median( sorted, {
 	'sorted': true,
-} );
+});
 // returns 3.5
 ```
 
-For object `arrays`, provide an accessor `function` for accessing `array` values
+For object `arrays`, provide an accessor `function` for accessing numeric `array` values
 
 ``` javascript
 var data = [
@@ -64,24 +61,25 @@ function getValue( d ) {
 	return d[ 1 ];
 }
 
-var m3 = nanmedian( data, {
+var m3 = median( data, {
 	'sorted': false,
 	'accessor': getValue
 });
 // returns 3.5
 ```
 
-__Note__: if provided an `array` which does not contain any numeric values, the function returns `null`.
+__Note__: if provided an empty `array`, the function returns `null`.
+
 
 ## Examples
 
 ``` javascript
-var data = new Array( 1001 );
+var median = require( 'compute-median' );
 
+var data = new Array( 1001 );
 for ( var i = 0; i < data.length; i++ ) {
 	data[ i ] = Math.round( Math.random() * 100 );
 }
-
 console.log( median( data ) );
 ```
 
@@ -94,14 +92,17 @@ $ node ./examples/index.js
 
 ## Notes
 
-If provided an unsorted input `array`, the function is `O( N log(N) )`, where `N` is the `array` length. If the `array` is already sorted in __ascending__ order, the function is `O(1)`.
+*	If provided a sorted (in __ascending__ order) numeric `array`, the function is `O(1)`.
+*	If provided a sorted object `array`, the function is `O(N)`.
+*	If provided an unsorted numeric `array`, the function is `O( N log(N) )`.
+* 	If provided an unsorted object `array`, the function is `O( N + N log(N) )`, where `N` is the `array` length.
 
 
 ## Tests
 
 ### Unit
 
-Unit tests use the [Mocha](http://visionmedia.github.io/mocha) test framework with [Chai](http://chaijs.com) assertions. To run the tests, execute the following command in the top-level application directory:
+Unit tests use the [Mocha](http://mochajs.org) test framework with [Chai](http://chaijs.com) assertions. To run the tests, execute the following command in the top-level application directory:
 
 ``` bash
 $ make test
@@ -125,15 +126,15 @@ $ make view-cov
 ```
 
 
+---
 ## License
 
 [MIT license](http://opensource.org/licenses/MIT).
 
 
----
 ## Copyright
 
-Copyright &copy; 2014. Athan Reines.
+Copyright &copy; 2014-2015. Athan Reines.
 
 
 [npm-image]: http://img.shields.io/npm/v/compute-median.svg
